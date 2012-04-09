@@ -1,0 +1,10 @@
+<% unless f.object.errors.blank? %>
+    <div class="alert alert-block alert-error">
+      <strong>Hmmm, correct the following issues and try again ...</strong>
+      <ul>
+        <% f.object.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>

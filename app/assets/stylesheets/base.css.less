@@ -1,0 +1,60 @@
+@lightGreyColor: #A3AFB1;
+@darkBlueColor: #2E414A;
+@redColor: #E82638;
+@lightRedColor: #F17782;
+
+@backgroundColor: @darkBlueColor;
+@formColor: @lightGreyColor;
+@placeholderColor: @lightGreyColor;
+
+
+body{
+    background-color: @backgroundColor;
+}
+
+.form-horizontal {
+    .control-label{
+        width: 0px;
+        font-size: 24px;
+        color: @formColor;
+    }
+    .controls{
+        margin-left: 0px;
+
+        input[type="text"],
+        input[type="password"],
+        input[type="tel"],
+        input[type="email"],
+        {
+            line-height: 30px;
+            height: 30px;
+            font-size: 24px;
+            color: @formColor;
+
+            &::-webkit-input-placeholder {
+                color: @placeholderColor;
+                font-size: 18px;
+            }
+        }
+
+        label{
+            font-size: 14px;
+            color: @formColor;
+        }
+
+        .help-block{
+            font-size: 14px;
+            color: @formColor;
+        }
+    }
+
+    .btn-xxlarge{
+        padding:18px 28px;
+        font-size: 18px;
+        line-height: normal;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+
+    }
+}
