@@ -12,6 +12,8 @@ gem 'twitter-bootstrap-rails', "~> 2.0.3"
 gem 'simple_form', '~> 2.0.1'
 gem 'country_select'
 
+gem 'rack-offline', :git => 'git://github.com/wycats/rack-offline.git'
+
 
 # Gems used only for assets and not required
 # in production environments by default.

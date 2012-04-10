@@ -5,6 +5,24 @@ Tfc::Application.routes.draw do
     get :summary, :on => :collection
   end
 
+  offline = Rack::Offline.configure do
+    cache "assets/application.js"
+    cache "assets/application.css"
+    files = Dir[
+      "#{root}/**/*.html"]
+    files.each do |file|
+      public_dir = Pathname.new("#{root}/public")
+      cache Pathname.new(file).relative_path_from(public_dir)
+    end
+    files = Dir[
+      "#{root}/assets/**/*.{js,css,jpg,png,gif}"]
+    files.each do |file|
+      cache Pathname.new(file).relative_path_from(root)
+    end
+
+    network "/"
+  end
+  match "/survey_cache.manifest" => offline
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
