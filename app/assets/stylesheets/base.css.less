@@ -6,6 +6,7 @@
 @backgroundColor: @darkBlueColor;
 @formColor: @lightGreyColor;
 @placeholderColor: @lightGreyColor;
+@errorColor: @redColor;
 
 
 body{
@@ -24,7 +25,7 @@ body{
         input[type="text"],
         input[type="password"],
         input[type="tel"],
-        input[type="email"],
+        input[type="email"]
         {
             line-height: 30px;
             height: 30px;
@@ -45,6 +46,14 @@ body{
         .help-block{
             font-size: 14px;
             color: @formColor;
+        }
+    }
+    .control-group.error input{
+        border-width: 5px;
+        border-color: @errorColor;
+
+        &::-webkit-input-placeholder {
+            color: @errorColor;
         }
     }
 

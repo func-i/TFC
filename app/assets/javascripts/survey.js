@@ -8,8 +8,24 @@ $(function(){
     }, function(){});
 
     $('#survey_submit').click(function(){
-        store_survey();
+        remove_error_state();
+        
+        if(validate_survey()){
+            store_survey();
+        }
     });
+
+    $('#survey_clear').click(function(){
+        reset_survey();
+    });
+
+    $('.control-group input').blur(function(){
+        validate_field(this);
+    })
+
+    $('#phone_number').mask('(999) 999-9999', {
+        placeholder:'#'
+    })
 
     $(window.applicationCache).bind('error', function () {
         console.log('There was an error when loading the cache manifest.');
@@ -30,6 +46,34 @@ function reset_survey(){
     $('#postal_code').val(''),
     $('#tfc_opt_in').attr('checked', true),
     $('#rogers_opt_in').attr('checked', true)
+
+    remove_error_state();
+}
+
+function remove_error_state(){
+    $('.control-group').removeClass('error');
+}
+
+function validate_survey(){
+    all_good = true;
+    all_good &= validate_field($('#first_name'));
+    all_good &= validate_field($('#last_name'));
+    all_good &= validate_field($('#email'));
+    all_good &= validate_field($('#phone_number'));
+    all_good &= validate_field($('#postal_code'));
+
+    return all_good;
+}
+
+function validate_field(field){
+    if(!$(field)[0].checkValidity()){
+        $(field).closest('.control-group').addClass('error');
+        return false;
+    }
+    else{
+        $(field).closest('.control-group').removeClass('error');
+        return true;
+    }
 }
 
 function store_survey(){    
