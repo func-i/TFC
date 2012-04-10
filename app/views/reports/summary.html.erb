@@ -1,0 +1,57 @@
+<%= render :partial => 'topbar' %>
+
+<div class="container">
+  <div class="row">
+    <%= form_tag summary_reports_path, :method => :get, :class => 'form-inlne' do%>
+      <input type="text" id="report_from" name="from" value="<%= params[:from]%>" placeholder="From" class="span2"/>
+      <input type="text" id="report_to" name="to" value="<%= params[:to]%>" placeholder="To" class="span2"/>
+      <input type="submit" value="Generate Report" class="btn btn-large btn-warning" style="margin-bottom:9px;" />
+    <% end %>
+
+    <div id="chart" class="span12" style="height:200px;width:100%;margin-bottom: 50px; margin-left:0px;"></div>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Start Time</th>
+          <th>End Time</th>
+          <th># Entrees</th>
+          <th>% TFC Opt-in</th>
+          <th>% Rogers Opt-in</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @summaries.each do |summary| %>
+          <tr>
+            <% entered_date = Date.parse(summary.entered_date) %>
+            <td><%= entered_date.strftime('%b %e, %Y') %></td>
+            <td><%= Time.parse(summary.start_time).strftime('%l:%H%P') %></td>
+            <td><%= Time.parse(summary.end_time).strftime('%l:%H%P') %></td>
+            <td><%= summary.num_of_entrees %></td>
+            <td><%= "#{100 * summary.num_of_tfc_opt_ins.to_i /  summary.num_of_entrees.to_i}%" if summary.num_of_entrees.to_i > 0 %></td>
+            <td><%= "#{100 * summary.num_of_rogers_opt_ins.to_i /  summary.num_of_entrees.to_i}%" if summary.num_of_entrees.to_i > 0 %></td>
+            <td><%= link_to 'View', reports_path(:from => entered_date.strftime('%m/%d/%Y'), :to => entered_date.strftime('%m/%d/%Y')) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  yAxisName = '# Entrees';
+  xAxisName = 'Date';
+  chartType = 'column';
+  
+  chartData = [];
+<% @summaries.each do |summary| %>
+    chartData.push(
+    [
+      1000*parseFloat(<%= Time.parse(summary.entered_date).to_f %>),
+      parseInt(<%= summary.num_of_entrees %>, 10)
+    ]
+  );
+<% end %>
+</script>

@@ -14,14 +14,17 @@
 ActiveRecord::Schema.define(:version => 20120409202933) do
 
   create_table "surveys", :force => true do |t|
-    t.string  "first_name"
-    t.string  "last_name"
-    t.string  "email"
-    t.string  "postal_code"
-    t.string  "phone_number"
-    t.boolean "tfc_opt_in"
-    t.boolean "rogers_opt_in"
-    t.string  "key"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "postal_code"
+    t.string   "phone_number"
+    t.boolean  "tfc_opt_in"
+    t.boolean  "rogers_opt_in"
+    t.string   "key"
+    t.datetime "entered_at"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
 end

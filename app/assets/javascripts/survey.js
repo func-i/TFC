@@ -11,9 +11,15 @@ $(function(){
         store_survey();
     });
 
+    $(window.applicationCache).bind('error', function () {
+        console.log('There was an error when loading the cache manifest.');
+    });
+
+    $(window).bind("online", send_surveys);
+
     reset_survey();
     
-    setInterval ( "send_surveys()", 5000 );//Send the surveys every 1 minute
+    setInterval ( "send_surveys()", 60000 );//Send the surveys every 1 minute
 });
 
 function reset_survey(){
@@ -35,7 +41,8 @@ function store_survey(){
         phone_number: $('#phone_number').val(),
         postal_code: $('#postal_code').val(),
         tfc_opt_in: $('#tfc_opt_in').is(':checked'),
-        rogers_opt_in: $('#rogers_opt_in').is(':checked')
+        rogers_opt_in: $('#rogers_opt_in').is(':checked'),
+        entered_at: Date.now().toString('d-MMM-yyyy HH:mm:ss')
     }, function(){
         $('#thank_you').modal();
         reset_survey();
@@ -46,11 +53,16 @@ function send_surveys(){
     if(sending)
         return;
 
+    if (!window.navigator.onLine)
+        return;
+
     sending = true;
 
     surveys.all(function(records){
-        if(0 == records.length)
-            return
+        if(0 == records.length){
+            sending = false;
+            return;
+        }
 
         $.ajax({
             type: 'POST',
@@ -68,9 +80,10 @@ function send_surveys(){
             },
             error: function(){
                 console.log('error sending surveys', records);
+            },
+            complete: function(){
+                sending = false;
             }
         });
-    });
-
-    sending = false;
+    });    
 }

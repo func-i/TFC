@@ -1,7 +1,9 @@
 Tfc::Application.routes.draw do
   resource :survey, :only => [:new, :create]
 
-  resources :reports, :only => [:index]
+  resources :reports, :only => [:index] do
+    get :summary, :on => :collection
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -13,6 +13,8 @@ class CreateSurveyTable < ActiveRecord::Migration
       t.boolean :tfc_opt_in
       t.boolean :rogers_opt_in
       t.string :key
+      t.datetime :entered_at
+      t.timestamps
     end
   end
 end
