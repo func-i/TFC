@@ -31,7 +31,7 @@ class ReportsController < ApplicationController
 
       grouped_data.each do |gd, records|
         if gd == histo_date
-          @histogram_data << [gd, records.count]
+          @histogram_data << [histo_date, records.count]
           pushed = true
           break
         end
