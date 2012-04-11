@@ -47,8 +47,21 @@ class ReportsController < ApplicationController
   end
 
   def summary
-    from_date = Date.strptime(params[:from], '%m/%d/%Y').beginning_of_day if params[:from]
-    to_date = Date.strptime(params[:to], '%m/%d/%Y').end_of_day if params[:to]
+    if params[:from]
+      from_date = Date.strptime(params[:from], '%m/%d/%Y').beginning_of_day
+    else
+      from_date = Survey.order('entered_at ASC').first.entered_at.beginning_of_day
+    end
+
+    if params[:to]
+      to_date = Date.strptime(params[:to], '%m/%d/%Y').end_of_day
+    else
+      to_date = Survey.order('entered_at DESC').first.entered_at.end_of_day
+    end
+
     @summaries = Survey.daily_summaries(from_date, to_date)
+
+    params[:from] = from_date.strftime('%m/%d/%Y')
+    params[:to] = to_date.strftime('%m/%d/%Y')
   end
 end
