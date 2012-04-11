@@ -1,12 +1,13 @@
 @lightGreyColor: #A3AFB1;
-@darkBlueColor: #2E414A;
-@redColor: #E82638;
+@darkBlueColor: #44565F;
+@redColor: #E61938;
 @lightRedColor: #F17782;
 
-@backgroundColor: @darkBlueColor;
-@formColor: @lightGreyColor;
+@backgroundColor: @redColor;
+@inputColor: @darkBlueColor;
+@labelColor: @lightGreyColor;
 @placeholderColor: @lightGreyColor;
-@errorColor: @redColor;
+@errorColor: @darkBlueColor;
 
 
 body{
@@ -17,7 +18,7 @@ body{
     .control-label{
         width: 0px;
         font-size: 24px;
-        color: @formColor;
+        color: @labelColor;
     }
     .controls{
         margin-left: 0px;
@@ -30,7 +31,7 @@ body{
             line-height: 30px;
             height: 30px;
             font-size: 24px;
-            color: @formColor;
+            color: @inputColor;
 
             &::-webkit-input-placeholder {
                 color: @placeholderColor;
@@ -40,12 +41,12 @@ body{
 
         label{
             font-size: 14px;
-            color: @formColor;
+            color: @labelColor;
         }
 
         .help-block{
             font-size: 14px;
-            color: @formColor;
+            color: @labelColor;
         }
     }
     .control-group.error input{
@@ -58,13 +59,15 @@ body{
     }
 
     .btn-xxlarge{
-        padding:18px 28px;
+        padding:18px 14px;
         font-size: 18px;
         line-height: normal;
         -webkit-border-radius: 5px;
         -moz-border-radius: 5px;
         border-radius: 5px;
-
+    }
+    #survey_submit{
+        margin-left: 0px;
     }
 }
 

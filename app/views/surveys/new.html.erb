@@ -5,32 +5,36 @@
 
 <div class="container">
   <div class="row">
+    <div class="span6">
+      <%= image_tag 'on_the_road.png' %>
+    </div>
+    <div class="span6">
     <%= form_tag '', :class => 'form-horizontal', :id => 'survey_form' do%>
       <%#=  render 'shared/form_errors', :f => f %>
 
 
-      <div class="control-group offset3">
+      <div class="control-group">
         <div class="controls">
           <!--input class="span6" id="first_name" name="first_name" placeholder="First Name" type="text" value="" required -->
           <%#= text_field_tag :first_name, '', :class=>'span6', :placeholder => 'First Name', :required => true %>
         </div>
       </div>
 
-      <div class="control-group  offset3">
+      <div class="control-group">
         <div class="controls">
           <input class="span6" id="last_name" name="last_name" placeholder="Last Name" type="text" value="" required />
           <%#= text_field_tag :last_name, '', :class=>'span6', :placeholder => 'Last Name'%>
         </div>
       </div>
 
-      <div class="control-group  offset3">
+      <div class="control-group">
         <div class="controls">
           <input class="span6" id="email" name="email" placeholder="Email" type="email" value="" required />
           <%#= email_field :email, '', :class=>'span6', :placeholder => 'Email'%>
         </div>
       </div>
 
-      <div class="control-group offset3">
+      <div class="control-group">
         <div class="controls">
           <input class="span3" id="phone_number" name="phone_number" placeholder="Phone #" type="tel" value="" required pattern='\(?\d{3}[\)|\-]?\s?\d{3}\-?\d{4}'/>
           <%#= text_field_tag :phone_number, '', :class=>'span1', :placeholder => '###'%>
@@ -38,14 +42,14 @@
         </div>
       </div>
 
-      <div class="control-group offset3">
+      <div class="control-group">
         <div class="controls">
           <input class="span2" id="postal_code" name="postal_code" placeholder="Postal Code" type="text" value="" required pattern='[a-zA-Z]\d[a-zA-Z]\s?\d[a-zA-Z]\d' />
           <%#= text_field_tag :postal_code, '', :class=>'span2', :placeholder => 'Postal Code'%>
         </div>
       </div>
 
-      <div class="control-group offset3">
+      <div class="control-group">
         <div class="controls">
           <label class="checkbox">
             <%= check_box_tag :tfc_opt_in %>
@@ -60,10 +64,11 @@
         </div>
       </div>
 
-      <%= link_to 'Submit', '#', :class=>'btn btn-xxlarge btn-primary offset3 span5', :id => 'survey_submit' %>
+      <%= link_to 'Submit', '#', :class=>'btn btn-primary btn-xxlarge span4', :id => 'survey_submit' %>
       <%= link_to 'Clear', '#', :class=>'btn btn-danger btn-xxlarge span1', :id => 'survey_clear' %>
 
     <% end %>
+  </div>
   </div>
 </div>
 

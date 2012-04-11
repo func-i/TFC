@@ -21,7 +21,11 @@ class ReportsController < ApplicationController
     @histogram_data = []
 
     histo_date = from_date.change(:min => from_date.min.round(-1))
-    grouped_data = @records.group_by{|record| record.entered_at.change(:min => record.entered_at.min.round(-1))}
+    grouped_data = @records.group_by{|record| 
+      min = record.entered_at.min
+      min_group = min - min % 10
+      record.entered_at.change(:min => min_group)
+    }
     while(histo_date < to_date)
       pushed = false
 
