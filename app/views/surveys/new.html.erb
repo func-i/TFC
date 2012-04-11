@@ -1,86 +1,94 @@
-<% content_for :html do %>
-  <!--html manifest="/survey_cache.manifest"/-->
+<% content_for :head do %>
+<meta name="viewport" content="width=device-width, maximum-scale=1.0" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <% end %>
 
 
-<div class="container">
+<div class="container" style="padding-top:60px;">
   <div class="row">
     <div class="span6">
       <%= image_tag 'on_the_road.png' %>
     </div>
     <div class="span6">
-    <%= form_tag '', :class => 'form-horizontal', :id => 'survey_form' do%>
-      <%#=  render 'shared/form_errors', :f => f %>
+      <%= form_tag '', :class => 'form-horizontal', :id => 'survey_form' do%>
+  <%#=  render 'shared/form_errors', :f => f %>
 
 
-      <div class="control-group">
-        <div class="controls">
-          <input class="span6" id="first_name" name="first_name" placeholder="First Name" type="text" value="" required>
-          <%#= text_field_tag :first_name, '', :class=>'span6', :placeholder => 'First Name', :required => true %>
+        <div class="control-group">
+          <div class="controls">
+            <input class="span6" id="first_name" name="first_name" placeholder="First Name" type="text" value="" required>
+  <%#= text_field_tag :first_name, '', :class=>'span6', :placeholder => 'First Name', :required => true %>
+          </div>
         </div>
-      </div>
 
-      <div class="control-group">
-        <div class="controls">
-          <input class="span6" id="last_name" name="last_name" placeholder="Last Name" type="text" value="" required />
-          <%#= text_field_tag :last_name, '', :class=>'span6', :placeholder => 'Last Name'%>
+        <div class="control-group">
+          <div class="controls">
+            <input class="span6" id="last_name" name="last_name" placeholder="Last Name" type="text" value="" required />
+  <%#= text_field_tag :last_name, '', :class=>'span6', :placeholder => 'Last Name'%>
+          </div>
         </div>
-      </div>
 
-      <div class="control-group">
-        <div class="controls">
-          <input class="span6" id="email" name="email" placeholder="Email" type="email" value="" required />
-          <%#= email_field :email, '', :class=>'span6', :placeholder => 'Email'%>
+        <div class="control-group">
+          <div class="controls">
+            <input class="span6" id="email" name="email" placeholder="Email" type="email" value="" required />
+  <%#= email_field :email, '', :class=>'span6', :placeholder => 'Email'%>
+          </div>
         </div>
-      </div>
 
-      <div class="control-group">
-        <div class="controls">
-          <input class="span3" id="phone_number" name="phone_number" placeholder="Phone #" type="tel" value="" required pattern='\(?\d{3}[\)|\-]?\s?\d{3}\-?\d{4}'/>
-          <%#= text_field_tag :phone_number, '', :class=>'span1', :placeholder => '###'%>
-          <%#= telephone_field :phone_number, '', :class=>'span2', :placeholder => 'Phone #'%>
+        <div class="control-group">
+          <div class="controls">
+            <input class="span3" id="phone_number" name="phone_number" placeholder="Phone #" type="tel" value="" required pattern='\(?\d{3}[\)|\-]?\s?\d{3}\-?\d{4}'/>
+  <%#= text_field_tag :phone_number, '', :class=>'span1', :placeholder => '###'%>
+  <%#= telephone_field :phone_number, '', :class=>'span2', :placeholder => 'Phone #'%>
+          </div>
         </div>
-      </div>
 
-      <div class="control-group">
-        <div class="controls">
-          <input class="span2" id="postal_code" name="postal_code" placeholder="Postal Code" type="text" value="" required pattern='[a-zA-Z]\d[a-zA-Z]\s?\d[a-zA-Z]\d' />
-          <%#= text_field_tag :postal_code, '', :class=>'span2', :placeholder => 'Postal Code'%>
+        <div class="control-group">
+          <div class="controls">
+            <input class="span2" id="postal_code" name="postal_code" placeholder="Postal Code" type="text" value="" required pattern='[a-zA-Z]\d[a-zA-Z]\s?\d[a-zA-Z]\d' />
+  <%#= text_field_tag :postal_code, '', :class=>'span2', :placeholder => 'Postal Code'%>
+          </div>
         </div>
-      </div>
 
-      <div class="control-group">
-        <div class="controls">
-          <label class="checkbox">
-            <%= check_box_tag :tfc_opt_in %>
-            Receive news from TFC
-          </label>
-          <label class="checkbox">
-            <%= check_box_tag :rogers_opt_in %>
-            Receive news from Rogers
-          </label>
+        <div class="control-group">
+          <div class="controls">
+            <label class="checkbox">
+              <%= check_box_tag :tfc_opt_in %>
+              Receive news from TFC
+            </label>
+            <label class="checkbox">
+              <%= check_box_tag :rogers_opt_in %>
+              Receive news from Rogers
+            </label>
 
-          <p class="help-block"><strong>Note:</strong> Opting in to receive news from Rogers and TFC will give you an extra chance to win!</p>
+            <p class="help-block"><strong>Note:</strong> Opting in to receive news from Rogers and TFC will give you an extra chance to win!</p>
+          </div>
         </div>
-      </div>
 
-      <%= link_to 'Submit', '#', :class=>'btn btn-primary btn-xxlarge span4', :id => 'survey_submit' %>
-      <%= link_to 'Clear', '#', :class=>'btn btn-danger btn-xxlarge span1', :id => 'survey_clear' %>
+        <%= link_to 'Submit', '#', :class=>'btn btn-primary btn-xxlarge span4', :id => 'survey_submit' %>
+        <%= link_to 'Clear', '#', :class=>'btn btn-xxlarge span1', :id => 'survey_clear' %>
 
-    <% end %>
-  </div>
+      <% end %>
+    </div>
   </div>
 </div>
 
 <div class="modal fade" id="thank_you" style="display:none;">
   <div class="modal-header">
     <a class="close" data-dismiss="modal">×</a>
-    <h3>Thank You</h3>
+    <h1>Thank You!</h1>
   </div>
   <div class="modal-body">
-    <p>TFC TFC TFC</p>
+    <p style="font-size:24px; line-height: 30px; text-align: center;">
+      Northmen strong, the TFC <br/>
+      Ne'er to go wrong, the TFC <br/>
+      Others will long<br/>
+      To follow along<br/>
+      All will belong, the TFC
+    </p>
   </div>
   <div class="modal-footer">
-    <a href="#" class="btn" data-dismiss="modal">Close</a>
+    <a href="#" class="btn btn-large btn-primary" data-dismiss="modal">Close</a>
   </div>
 </div>

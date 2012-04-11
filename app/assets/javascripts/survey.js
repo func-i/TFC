@@ -7,6 +7,7 @@ $(function(){
         table:'surveys'
     }, function(){});
 
+
     $('#survey_submit').click(function(){
         remove_error_state();
         
