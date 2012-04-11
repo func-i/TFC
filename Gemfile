@@ -15,6 +15,11 @@ gem 'country_select'
 gem 'rack-offline', :git => 'git://github.com/wycats/rack-offline.git'
 
 
+# Use unicorn as the app server
+gem 'unicorn'
+
+
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -35,8 +40,6 @@ gem 'jquery-rails'
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 
-# Use unicorn as the app server
-# gem 'unicorn'
 
 # Deploy with Capistrano
 # gem 'capistrano'
