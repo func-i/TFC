@@ -8,18 +8,19 @@ $(function(){
         table:'surveys'
     }, function(){});
 
-    stats = new Lawnchair({
+    /*stats = new Lawnchair({
       adaptor:'dom',
-      table:'stats'
-    }, function(){});
+      table:'stats',
+      name: 'stats'
+    }, function(){});*/
 
-    stats.get('numStored', function(data) {
+    /*stats.get('numStored', function(data) {
       if (data) {
         console.log('Records stored: ' + data.value.toString());
       } else {
         console.log('No Records stored!');
       }
-    });
+    });*/
 
     $('#survey_submit').click(function(){
         remove_error_state();
@@ -118,13 +119,13 @@ function store_survey(){
         entered_at: Date.now().toString('d-MMM-yyyy HH:mm:ss')
     }, function(){
         // increase surveys counter (permanent)
-        stats.get('numStored', function(data) {
+        /*stats.get('numStored', function(data) {
           if (data) {
             stats.save({key: 'numStored', value: data.value+1});
           } else {
             stats.save({key: 'numStored', value: 1});
           }
-        });
+        });*/
         $('#thank_you').modal();
         reset_survey();
     });
@@ -140,6 +141,7 @@ function send_surveys(){
     sending = true;
 
     surveys.all(function(records){
+
         if(0 == records.length){
             sending = false;
             return;
