@@ -26,7 +26,6 @@
 /spec/tmp/*
 /system
 /public/system
-/public/assets
 /public/uploads/*
 /**.orig
 /rerun.txt
