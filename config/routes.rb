@@ -8,17 +8,10 @@ Tfc::Application.routes.draw do
   offline = Rack::Offline.configure do
     cache "assets/application.js"
     cache "assets/application.css"
-    files = Dir[
-      "#{root}/**/*.html"]
-    files.each do |file|
-      public_dir = Pathname.new("#{root}/public")
-      cache Pathname.new(file).relative_path_from(public_dir)
-    end
-    files = Dir[
-      "#{root}/assets/**/*.{js,css,jpg,png,gif}"]
-    files.each do |file|
-      cache Pathname.new(file).relative_path_from(root)
-    end
+    cache "assets/on_the_road.png"
+    cache "404.html"
+    cache "500.html"
+    version "1"
 
     network "/"
   end

@@ -12,4 +12,32 @@
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
+/log/*.pid
 /tmp
+
+# Others, normally seen in Rails apps before - KV
+# Some taken from https://github.com/github/gitignore/blob/master/Rails.gitignore
+/config/database.yml
+/config/newrelic.yml
+/log/newrelic_agent_store.db
+/.sass-cache
+/.bin/
+/coverage/
+/spec/tmp/*
+/system
+/public/system
+/public/assets
+/public/uploads/*
+/**.orig
+/rerun.txt
+/pickle-email-*.html
+/vendor/bundle
+/*.rbc
+/*.sassc
+/.sass-cache
+/capybara-*.html
+/.rspec
+/uploads
+.DS_Store*
+/nbproject
+.rvmrc

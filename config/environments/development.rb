@@ -29,9 +29,9 @@ Tfc::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-  # Do not compress assets
-  config.assets.compress = false
+  config.assets.compress = true
+  config.assets.compile = true
 
   # Expands the lines which load the assets
-  config.assets.debug = true
+  config.assets.debug = false
 end
