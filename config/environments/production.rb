@@ -18,7 +18,7 @@ Tfc::Application.configure do
   config.assets.compile = false
 
   # Easy fix for making the offline-caching manifest work with the assets
-  config.assets.digest = false
+  config.assets.digest = true#false
 
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH
