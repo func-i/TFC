@@ -31,6 +31,7 @@ Tfc::Application.configure do
 
   config.assets.compress = true
   config.assets.compile = true
+  config.assets.digest = false
 
   # Expands the lines which load the assets
   config.assets.debug = false
