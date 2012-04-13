@@ -11,8 +11,6 @@ Tfc::Application.routes.draw do
     cache "assets/on_the_road.png"
     cache "404.html"
     cache "500.html"
-    version "1"
-
     network "/"
   end
   match "/survey_cache.manifest" => offline

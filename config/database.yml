@@ -17,8 +17,9 @@ development:
   encoding: unicode
   database: tfc_development
   pool: 5
-  username: postgres
-  password:
+  username: mdev
+  password: mdev
+  host: localhost
 
   # Schema search path. The server defaults to $user,public
   #schema_search_path: myapp,sharedapp,public
@@ -37,5 +38,6 @@ test:
   encoding: unicode
   database: tfc_test
   pool: 5
-  username: postgres
-  password:
+  username: mdev
+  password: mdev
+  host: localhost
