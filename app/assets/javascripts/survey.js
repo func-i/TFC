@@ -1,5 +1,6 @@
 var surveys = null;
 var sending = false;
+var stats = false;
 
 $(function(){
     surveys = new Lawnchair({
@@ -7,6 +8,18 @@ $(function(){
         table:'surveys'
     }, function(){});
 
+    stats = new Lawnchair({
+      adaptor:'dom',
+      table:'stats'
+    }, function(){});
+
+    stats.get('numStored', function(data) {
+      if (data) {
+        console.log('Records stored: ' + data.value.toString());
+      } else {
+        console.log('No Records stored!');
+      }
+    });
 
     $('#survey_submit').click(function(){
         remove_error_state();
@@ -40,17 +53,17 @@ $(function(){
 
     console.log('Im started');
 
-    function logEvent(event) {
+    /*function logEvent(event) {
       console.log(event.type);
-  }
+    }*/
 
-  window.applicationCache.addEventListener('checking',logEvent,false);
-  window.applicationCache.addEventListener('noupdate',logEvent,false);
-  window.applicationCache.addEventListener('downloading',logEvent,false);
-  window.applicationCache.addEventListener('cached',logEvent,false);
-  window.applicationCache.addEventListener('updateready',logEvent,false);
-  window.applicationCache.addEventListener('obsolete',logEvent,false);
-  window.applicationCache.addEventListener('error',logEvent,false);
+  //window.applicationCache.addEventListener('checking',logEvent,false);
+  //window.applicationCache.addEventListener('noupdate',logEvent,false);
+  //window.applicationCache.addEventListener('downloading',logEvent,false);
+  //window.applicationCache.addEventListener('cached',logEvent,false);
+  //window.applicationCache.addEventListener('updateready',logEvent,false);
+  //window.applicationCache.addEventListener('obsolete',logEvent,false);
+  //window.applicationCache.addEventListener('error',logEvent,false);
 
 });
 
@@ -104,6 +117,14 @@ function store_survey(){
         rogers_opt_in: $('#rogers_opt_in').is(':checked'),
         entered_at: Date.now().toString('d-MMM-yyyy HH:mm:ss')
     }, function(){
+        // increase surveys counter (permanent)
+        stats.get('numStored', function(data) {
+          if (data) {
+            stats.save({key: 'numStored', value: data.value+1});
+          } else {
+            stats.save({key: 'numStored', value: 1});
+          }
+        });
         $('#thank_you').modal();
         reset_survey();
     });
