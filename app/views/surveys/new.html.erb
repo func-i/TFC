@@ -1,7 +1,7 @@
 <% content_for :head do %>
-<meta name="viewport" content="width=device-width, maximum-scale=1.0" />
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, maximum-scale=1.0" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <% end %>
 
 
@@ -9,42 +9,34 @@
   <div class="row">
     <div class="span6">
       <%= form_tag '', :class => 'form-horizontal', :id => 'survey_form' do%>
-  <%#=  render 'shared/form_errors', :f => f %>
-
 
         <div class="control-group">
           <div class="controls">
             <input class="span6" id="first_name" name="first_name" placeholder="First Name" type="text" value="" required>
-  <%#= text_field_tag :first_name, '', :class=>'span6', :placeholder => 'First Name', :required => true %>
           </div>
         </div>
 
         <div class="control-group">
           <div class="controls">
             <input class="span6" id="last_name" name="last_name" placeholder="Last Name" type="text" value="" required />
-  <%#= text_field_tag :last_name, '', :class=>'span6', :placeholder => 'Last Name'%>
           </div>
         </div>
 
         <div class="control-group">
           <div class="controls">
             <input class="span6" id="email" name="email" placeholder="Email" type="email" value="" required />
-  <%#= email_field :email, '', :class=>'span6', :placeholder => 'Email'%>
           </div>
         </div>
 
         <div class="control-group">
           <div class="controls">
             <input class="span3" id="phone_number" name="phone_number" placeholder="Phone #" type="tel" value="" required pattern='\(?\d{3}[\)|\-]?\s?\d{3}\-?\d{4}'/>
-  <%#= text_field_tag :phone_number, '', :class=>'span1', :placeholder => '###'%>
-  <%#= telephone_field :phone_number, '', :class=>'span2', :placeholder => 'Phone #'%>
           </div>
         </div>
 
         <div class="control-group">
           <div class="controls">
             <input class="span2" id="postal_code" name="postal_code" placeholder="Postal Code" type="text" value="" required pattern='[a-zA-Z]\d[a-zA-Z]\s?\d[a-zA-Z]\d' />
-  <%#= text_field_tag :postal_code, '', :class=>'span2', :placeholder => 'Postal Code'%>
           </div>
         </div>
 
@@ -58,7 +50,6 @@
               <%= check_box_tag :rogers_opt_in %>
               Receive news/offers from Rogers
             </label>
-
           </div>
         </div>
 
@@ -69,6 +60,7 @@
     </div>
     <div class="span6">
       <%= image_tag '/on_the_road.png' %>
+      <a class="pull-right" data-toggle="modal" href="#rules_and_regs" style="color:black;">Rules & Regulations</a>
     </div>
   </div>
 </div>
@@ -86,6 +78,108 @@
       To follow along<br/>
       All will belong, the TFC
     </p>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn btn-large btn-primary" data-dismiss="modal">Close</a>
+  </div>
+</div>
+
+<div class="modal fade" id="rules_and_regs" style="display:none;">
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal">×</a>
+    <h1>Rules and Regs!</h1>
+  </div>
+  <div class="modal-body">
+    <h2>TFC on the Road Challenge (the “Contest”)</h2>
+    <h3>Official Rules and Regulations (the “Rules”)</h3>
+
+    <br/>
+
+    <p>
+      Participation in the Contest constitutes full and unconditional agreement and acceptance of these Rules, which are final on all matters relating to the Contest.
+    </p>
+
+    <h4>Eligibility:</h4>
+    <p>
+      No Purchase Necessary. The Contest period (the “<strong>Contest Period</strong>”) begins at 12:01 p.m. ET on Saturday April 14th, 2012 and closes at 11:59 a.m. ET on Monday October 1st , 2012 (the “<strong>Contest Closing Date</strong>”).
+    </p>
+    <p>
+      This Contest is only open to legal residents of Ontario who are 18 years of age or older. Employees (and their immediate families and those with whom they are domiciled) of Maple Leaf Sports & Entertainment Ltd. (“<strong>MLSE</strong>”), Toronto FC, The Ontario Soccer Association (“<strong>OSA</strong>”), Sugar Media, Rogers Communications Inc. (“<strong>Rogers</strong>”), (collectively the “<strong>Contest Sponsors</strong>”), Major League Soccer L.L.C. (“<strong>MLS</strong>”) and its Member Teams, Soccer United Marketing, L.L.C. (“<strong>SUM</strong>”), MLS Canada ULC, and each of their respective subsidiaries, affiliates, and their advertising and promotional agencies are not eligible to enter.
+    </p>
+
+    <h4>How To Enter:</h4>
+    <p>
+      To be eligible, enter anytime during the Contest Period by fully completing an online entry form with a Sugar Media representative at a TFC on the Road activation.
+    </p>
+    <p>
+      In order to be eligible to win a prize, entries must be received prior to the Contest Closing Date. Limit of one entry per person.
+    </p>
+    <p>
+      All entries will become the property of the Contest Sponsors and will not be returned. Entries which are incomplete or fraudulent are null and void. Multiple entries using the same email account or using any device to play multiple times or as multiple contestants will result in disqualification.
+    </p>
+    <p>
+      By entering the Contest, you agree to be bound by the decisions of the Contest Sponsors, which are final with respect to all matters relating to the Contest. The Contest Sponsors accept no responsibility for entries which are lost, misdirected or delayed for any reason. Nor is any responsibility assumed for incorrect or inaccurate capture of entry information, including (but not limited to), malfunction, human error, lost/delayed/garbled Internet/e-mail transmission, omission, interruption, deletion, defect, or failures of any telephone, technical, network, online, or hardware or software or any combination hereof.
+    </p>
+
+    <h4>Prizes:</h4>
+    <p>
+      There is one (1) Grand Prize to be won consisting of:
+    </p>
+    <p style="margin-left:25px">
+      A VIP Toronto FC Experience including two (2) tickets to a Toronto FC regular season game home game (specific seat location to be determined by Contest Sponsor) with Pregame Tour, meet & greet, sideline experience, and Toronto FC merchandise. Date of game and meet & greet opportunity selected at MLSE’s sole discretion. If Grand Prize is scheduled and cancelled by winner for any reason, Grand Prize will be forfeited with no compensation or alternative prize awarded to winner.
+    </p>
+    <p>
+      Prior to being awarded the Grand Prize, the eligible winner will be required to sign such declaration of eligibility, release of liability and any other waivers required by Contest Sponsors. Failure to sign and return such forms when required by Contest Sponsors will be result in eligible winner’s disqualification and the forfeiture of the Grand Prize with no compensation or alternative prize awarded.
+    </p>
+    <p>
+      Approximate retail value of Grand Prize is $1,000 CDN.
+    </p>
+    <p>
+      Grand Prize winner may not assign, transfer, or substitute prizes. Non-cash prizes cannot be redeemed for cash. All incidental costs and expenses associated with the Grand Prize including, without limitation, transportation to and from location and items of a personal nature are not included in the prize are the sole responsibility of the Grand Prize winner and his/her guests. The Contest Sponsors reserve the right, (within their sole discretion) to substitute, in whole or in part, a prize of equal or greater value.
+    </p>
+
+    <h4>Winner Selection:</h4>
+    <p>
+      The eligible Grand Prize winner will be selected from all eligible entries received prior to the Contest Closing Date in a random draw which will be conducted at the offices of MLSE at, or about 1:00 p.m. on October 3rd, 2012. Odds of winning depend on number of eligible entries received. Contest Sponsors will attempt to contact the selected entrant within twenty-four (24) hours following the drawing by telephone at the telephone number provided by the entrant during Contest entry. Before being declared a Grand Prize winner, all selected entrants must: (i) correctly answer a time-limited mathematical skill-testing question without assistance or the use of a calculator, administered at the time of contact; and (ii) the potential winner and their guests must sign a Declaration of Compliance with the Contest rules and a Release of Liability, releasing the Contest Sponsors and Major League Soccer and its Member Teams, SUM, MLS Canada ULC and each of their respective subsidiaries, affiliates, directors, officers, governors, agents (collectively, the “<strong>Released Parties</strong>”) from any and all liability in connection with: (i) entrant’s participation in the Contest; (ii) the acceptance and use of any prizes awarded in the Contest; and (iii) the administration of the Contest by the Contest Sponsors, including (without limitation) the selection of the potential Grand Prize winner or the distribution of the Grand Prize awarded in this Contest. The Declaration and Release document must be returned on or before the date indicated on the documents or the Grand Prize will be forfeited.
+    </p>
+    <p>
+      If the selected entrant does not meet all of the Contest conditions, fails to answer the skill- testing question correctly, fails or refuses to return the executed declaration and release forms for the selected entrant or contact cannot be made within twenty-four (24) hours of initial contact attempt, that entry will be disqualified and the Contest Sponsor shall be entitled to select a new eligible Grand Prize winner from all remaining eligible entries. The Contest Sponsor is not responsible, whether as a result of human error or otherwise, for any failure to contact any potential winner. Once declared a prize winner, selected entrant will be directed as to how to claim his/her prize.
+    </p>
+
+    <h4>General Rules:</h4>
+    <p>
+      The prize must be accepted as awarded and no prize substitutions of cash or otherwise or transfer of the prize will be made, provided that the Contest Sponsors may make prize substitutions of equal or greater value. No telephone contact or correspondence will be entered into except with potential prize winners.
+    </p>
+    <p>
+      By entering this Contest, each entrant consents to the use of his/her name, likeness, image, photograph, voice statement(s) and city of residence by the Contest Sponsors and MLS, without further compensation, for any and all publicity purposes, commercial or otherwise, in all media. The Contest is subject to all applicable federal, provincial and municipal laws and regulations and shall be governed by the laws of the Province of Ontario and the federal laws of Canada applicable therein.
+    </p>
+    <p>
+      By entering the Contest, each entrant agrees to be bound by these rules and regulations and all decisions of the Contest Sponsors, which decisions are final with respect to all matters relating to the Contest, including (without limitation) the selection of prize winners.
+    </p>
+    <p>
+      By entering the Contest, entrants agree to hold harmless and indemnify the Released Parties against any and all liability, damages or causes of action (however named or described with respect to or arising out of either: (i) entrant’s participation in the Contest; (ii) the receipt or use of the prize awarded herein; or (iii) the administration of the Contest (including winner selection) and distribution of the prizes awarded herein.
+    </p>
+    <p>
+      Entrants hereby release, waive and discharge any and all claims of damage, loss or causes of action (including, negligence), including (but not limited to) death, personal injury or loss or damage to property, which the entrant or any of the entrant’s representatives, heirs, next of kin or assignees (“<strong>Entrant’s Representatives</strong>”) may have or which may hereinafter accrue to the entrant or Entrant Representatives against the Released Parties as a result of the entrant’s participation in the Contest or the receipt or use of the Prize(s) awarded herein.
+    </p>
+    <p>
+      The following are prohibited and will result in automatic disqualification from the Contest: (1) using any method that artificially increases odds of winning; (2) non-compliance with these Contest Rules; and (3) any other act which the Contest Sponsors determine, at their sole discretion, jeopardizes the integrity of the Contest.
+    </p>
+    <p>
+      The Contest Sponsors may terminate, modify, suspend or withdraw from this Contest (and/or any aspect thereof, including methods for selection of the prize winners), in whole or in part, at any time without notice for any reason, without liability, at their sole discretion.
+    </p>
+    <p>
+      The Contest Sponsors reserve the right to substitute prizes of equal or greater value and/or to terminate, modify or withdraw this Contest, in whole or in part (including altering the manner in which the prizes are distributed), at any time, without prior notice for any reason including, but not limited to, weather, or, if viruses, bugs, tampering or other causes beyond the Contest Sponsors’ control affect the administration, security, fairness or proper play or conduct of the Contest. In the event a substitute prize is awarded, such prize must be accepted as awarded and cannot be exchanged for cash or otherwise. Further, the Contest Sponsors reserve the right to disqualify any person and void any entries of that person who it believes has tampered with the entry process or any other component of the Contest, whose conduct or action affects the administration, security or fairness, integrity or proper conduct of the Contest, or who fails to meet or abide by these Rules and conditions.
+    </p>
+    <p>
+      The Contest Sponsors do not assume any responsibility for tampering, theft, defects, viruses, human errors including negligence, deletions, technical or telephone, computer line, network, server, access providers, computer equipment or software problems, undeliverable messages, computer errors, lost, misdirected, late or incomplete entries or inaccurate capture of information or any online difficulties that may result in damage or malfunction the computer or the failure of the Contest Sponsors to process any entry and otherwise award any prize. Nor is responsibility assumed for printing errors appearing in these rules or related Contest materials. In addition, the Contest Sponsors will not assume any responsibility of any nature whatsoever in all cases where their inability to hold the Contest or to remit the prizes to the winners results from a cause beyond their control, including Acts of God, weather conditions, strike, lock-out or other labour dispute. Any attempt to deliberately damage any website or to undermine the legitimate operation of this Contest is a violation of criminal and civil laws, and should an attempt be made, the Contest Sponsors reserve the right to seek remedies and damages to the fullest extent permitted by law, including criminal prosecution.
+    </p>
+    <p>
+      Your personal information may be used to send you additional information about the Contest Sponsors only if you provide your affirmative consent to receive such information when entering the Contest. Your personal information will not be used for any other purpose and will not be shared with anyone else. Absent your consent, your personal information will only be used in connection with the administration of the Contest.
+    </p>
+    <p>
+      Contest Sponsors reserve the right to amend or terminate all or any portion of this Contest at any time for any reason without prior notice.
+    </p>  
   </div>
   <div class="modal-footer">
     <a href="#" class="btn btn-large btn-primary" data-dismiss="modal">Close</a>
