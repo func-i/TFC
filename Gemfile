@@ -18,7 +18,7 @@ gem 'rack-offline', :git => 'git://github.com/wycats/rack-offline.git'
 # Use unicorn as the app server
 gem 'unicorn'
 
-
+gem 'spreadsheet', ">= 0.6.5"
 
 # Gems used only for assets and not required
 # in production environments by default.

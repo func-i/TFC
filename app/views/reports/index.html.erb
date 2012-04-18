@@ -11,6 +11,8 @@
 
     <div id="chart" class="span12" style="height:200px;width:100%;margin-bottom: 50px; margin-left:0px;"></div>
 
+
+
     <table class="table table-striped">
       <thead>
         <tr>
@@ -41,6 +43,10 @@
         <% end %>
       </tbody>
     </table>
+
+    <%= link_to 'Download as XLS', params.merge(:format => :xls), :class => 'btn btn-mini' %>
+    <br/><br/>
+
   </div>
 </div>
 
