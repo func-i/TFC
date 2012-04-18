@@ -103,8 +103,8 @@ class ReportsController < ApplicationController
                                      :size => 18
     sheet1.row(0).default_format = format
 
-    book.write "tmp/#{file_name}"
-    send_file "tmp/#{file_name}" #, :disposition => "attachment", :stream => true, :buffer_size => 4096
+    book.write "xls/#{file_name}"
+    send_file "xls/#{file_name}" #, :disposition => "attachment", :stream => true, :buffer_size => 4096
   end
 
 

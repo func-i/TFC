@@ -14,6 +14,7 @@
 /log/*.log
 /log/*.pid
 /tmp
+/xls/*.*
 
 # Others, normally seen in Rails apps before - KV
 # Some taken from https://github.com/github/gitignore/blob/master/Rails.gitignore
