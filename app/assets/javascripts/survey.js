@@ -1,32 +1,19 @@
-var surveys = null;
 var sending = false;
 var stats = false;
 
 $(function(){
-    surveys = new Lawnchair({
-        adaptor:'dom',
-        table:'surveys'
-    }, function(){});
-
-    /*stats = new Lawnchair({
-      adaptor:'dom',
-      table:'stats',
-      name: 'stats'
-    }, function(){});*/
-
-    /*stats.get('numStored', function(data) {
-      if (data) {
-        console.log('Records stored: ' + data.value.toString());
-      } else {
-        console.log('No Records stored!');
-      }
-    });*/
-
     $('#survey_submit').click(function(){
         remove_error_state();
         
         if(validate_survey()){
             store_survey();
+        }
+        else{
+            incrementCounter('error_counter', 1);
+
+            var error_surveys = getStoredArray('error_surveys');
+            error_surveys.push(serializeForm());
+            storeArray('error_surveys', error_surveys);
         }
     });
 
@@ -51,21 +38,6 @@ $(function(){
     reset_survey();
     
     setInterval ( "send_surveys()", 60000 );//Send the surveys every 1 minute
-
-    console.log('Im started');
-
-    /*function logEvent(event) {
-      console.log(event.type);
-    }*/
-
-  //window.applicationCache.addEventListener('checking',logEvent,false);
-  //window.applicationCache.addEventListener('noupdate',logEvent,false);
-  //window.applicationCache.addEventListener('downloading',logEvent,false);
-  //window.applicationCache.addEventListener('cached',logEvent,false);
-  //window.applicationCache.addEventListener('updateready',logEvent,false);
-  //window.applicationCache.addEventListener('obsolete',logEvent,false);
-  //window.applicationCache.addEventListener('error',logEvent,false);
-
 });
 
 function reset_survey(){
@@ -106,9 +78,130 @@ function validate_field(field){
     }
 }
 
-function store_survey(){    
-    surveys.save(
-    {
+function store_survey(){
+    //ADD SURVEY TO UNSENT LIST
+    var unsent_surveys = getStoredArray('unsent_surveys');
+
+    unsent_surveys.push(serializeForm());
+
+    try {
+        storeArray('unsent_surveys', unsent_surveys);
+    } catch (e) {
+        if (e == QUOTA_EXCEEDED_ERR) {
+            if(clearSpace()){
+                store_survey(); //CALL STORE SURVEY RECURSIVELY TO RETRY
+            }
+
+            return;
+        }
+
+        alert('Problem Saving Survey (unknown #' + e + '). Please call Josh Borts @ 647-405-8994');
+    }
+
+    //INCREMENT STORAGE COUNTER
+    incrementCounter('stored_counter', 1);
+
+    //SHOW THE THANK YOU MODAL
+    $('#thank_you').modal();
+
+    //RESET THE FORM
+    reset_survey();
+}
+
+function send_surveys(){
+    //RETURN IF ALREADY SENDING
+    if(sending)
+        return;
+
+    //RETURN IF NOT ONLINE
+    if (!window.navigator.onLine)
+        return;
+
+    sending = true;
+
+    var unsent_surveys = getStoredArray('unsent_surveys');
+
+    //RETURN IF NOTHING TO SEND
+    if(0 == unsent_surveys.length){
+        sending = false;
+        return;
+    }
+
+    //POST
+    $.ajax({
+        type: 'POST',
+        url: '/survey',
+        data: {
+            'surveys': unsent_surveys
+        },
+        success: function(){
+            //INCREMENT SENT COUNTER
+            incrementCounter('sent_counter', unsent_surveys.length);
+
+            //SUCCESSFULLY SENT. MOVE SENT SURVEYS FROM UNSENT TO SENT ARRAYS
+            var sent_surveys = getStoredArray('sent_surveys');
+            var new_unsent_surveys = getStoredArray('unsent_surveys');
+
+            //LOOP THROUG ALL AND SHIFT OUT OF UNSENT AND PUSH ONTO SENT
+            var loop_bool = true;
+            while(loop_bool){
+                var survey1 = unsent_surveys.shift();
+                var survey2 = new_unsent_surveys.shift();
+                if(survey1 != survey2 || undefined == survey1 || undefined == survey2){
+                    loop_bool = false;
+                }
+                else
+                    sent_surveys.push(survey1);
+            }
+
+            //RESTORE SURVEY ARRAYS
+            storeArray('sent_surveys', sent_surveys);
+            storeArray('unsent_surveys', new_unsent_surveys);
+        },
+        error: function(){
+            //ERROR SENDING SURVEYS
+            console.log('error sending surveys', records);
+        },
+        complete: function(){
+            //ALLOW NEXT BATCH TO BE SENT
+            sending = false;
+        }
+    });
+}
+
+function clearSpace(){
+    //DELETE SURVEY FROM THE ERROR LIST IF EXIST
+    var error_surveys = getStoredArray('error_surveys');
+    if(0 == error_surveys.length){
+        var sent_surveys = getStoredArray('sent_surveys');
+        if(0 == sent_surveys.length){
+            alert('Problem Saving Survey (nothing to clear). Please call Josh Borts @ 647-405-8994');
+            return false;
+        }
+
+        sent_surveys.shift();
+        try{
+            storeArray('sent_surveys', sent_surveys);
+        } catch(e){
+            alert('Problem Saving Survey (clearing sent). Please call Josh Borts @ 647-405-8994');//WTF. There is less data now to save
+            return false;
+        }
+    }
+    else{
+        error_surveys.shift();
+        try{
+            storeArray('error_surveys', error_surveys);
+        } catch(e){
+            alert('Problem Saving Survey (clearing errors). Please call Josh Borts @ 647-405-8994');//WTF. There is less data now to save
+            return false;
+        }
+    }
+
+    return true;
+}
+
+function serializeForm(){
+    return {
         first_name: $('#first_name').val(),
         last_name: $('#last_name').val(),
         email: $('#email').val(),
@@ -117,56 +210,25 @@ function store_survey(){
         tfc_opt_in: $('#tfc_opt_in').is(':checked'),
         rogers_opt_in: $('#rogers_opt_in').is(':checked'),
         entered_at: Date.now().toString('d-MMM-yyyy HH:mm:ss')
-    }, function(){
-        // increase surveys counter (permanent)
-        /*stats.get('numStored', function(data) {
-          if (data) {
-            stats.save({key: 'numStored', value: data.value+1});
-          } else {
-            stats.save({key: 'numStored', value: 1});
-          }
-        });*/
-        $('#thank_you').modal();
-        reset_survey();
-    });
+    };
 }
 
-function send_surveys(){
-    if(sending)
-        return;
+function getStoredArray(key){
+    var arr = localStorage.getItem(key);
+    if(null == arr)
+        return [];
+    else
+        return JSON.parse(arr);
+}
 
-    if (!window.navigator.onLine)
-        return;
+function storeArray(key, arr){
+    localStorage.setItem(key, JSON.stringify(arr));
+}
 
-    sending = true;
+function incrementCounter(key, amount){
+    var counter = localStorage.getItem(key);
+    if(null == counter)
+        counter = 0;
 
-    surveys.all(function(records){
-
-        if(0 == records.length){
-            sending = false;
-            return;
-        }
-
-        $.ajax({
-            type: 'POST',
-            url: '/survey',
-            data: {
-                'surveys': records
-            },
-            success: function(){
-                console.log('surveys sent', records);
-                $.each(records, function(index, r){
-                    surveys.remove(r, function(){
-                        console.log('removed', r)
-                    });
-                });
-            },
-            error: function(){
-                console.log('error sending surveys', records);
-            },
-            complete: function(){
-                sending = false;
-            }
-        });
-    });    
+    localStorage.setItem(key, parseInt(counter, 10) + amount);
 }
