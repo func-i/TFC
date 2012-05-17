@@ -30,9 +30,9 @@ Tfc::Application.configure do
   config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   config.assets.compress = true
-  config.assets.compile = false
-  config.assets.digest = true
+  config.assets.compile = true
+  config.assets.digest = false
 
   # Expands the lines which load the assets
-  config.assets.debug = false
+  config.assets.debug = true
 end
