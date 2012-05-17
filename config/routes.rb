@@ -6,7 +6,7 @@ Tfc::Application.routes.draw do
   end
 
   offline = Rack::Offline.configure do
-    cache "assets/application-dec37723ee0ffbf04f2126818cf6136c.js"
+    cache "assets/application-e8c622d9b3fb7087f0da8f33dd07c3fa.js"
     cache "assets/application-48bd90fce6838f1fa2aeab5dcce6d26c.css"
     cache "on_the_road.png"
     cache "404.html"
