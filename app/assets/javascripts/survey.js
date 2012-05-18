@@ -226,12 +226,15 @@ function getStoredSurveyArray(key){
     var arr = localStorage.getItem(key);
     if(null == arr)
         return [];
-    else
-        return JSON.parse(arr);
+    else{
+        try{ return JSON.parse(arr); }
+        catch(e){ console.log('Problems parsing JSON String: ' + arr); }
+    }
 }
 
 function storeArray(key, arr){
-    localStorage.setItem(key, JSON.stringify(arr));
+    try{ localStorage.setItem(key, JSON.stringify(arr)); }
+    catch(e){ console.log('Problem JSONing Array: ' + arr); }
 }
 
 function incrementSurveyCounter(key, amount){
