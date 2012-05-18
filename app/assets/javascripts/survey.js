@@ -46,6 +46,7 @@ $(function(){
     
     setInterval ( "sendSurveys()", 60000 );//Send the surveys every 1 minute
 
+    console.log('Version 2.1');
     //testSurveyStorage();
 });
 
@@ -224,7 +225,7 @@ function serializeForm(){
 
 function getStoredSurveyArray(key){
     var arr = localStorage.getItem(key);
-    if(null == arr)
+    if(null == arr || undefined == arr)
         return [];
     else{
         try{ return JSON.parse(arr); }
