@@ -46,7 +46,7 @@ $(function(){
     
     setInterval ( "sendSurveys()", 60000 );//Send the surveys every 1 minute
 
-    console.log('Version 2.1');
+    console.log('Version 2.2');
     //testSurveyStorage();
 });
 
